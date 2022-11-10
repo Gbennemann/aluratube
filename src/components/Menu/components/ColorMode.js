@@ -1,9 +1,9 @@
 import React from "react";
 
 export const ColorModeContext = React.createContext({
-    mode: "light",
-    setMode: () => { alert("Me configure") },
-    toggleMode: () => { alert("Me configure") },
+    mode: "",
+    setMode: () => { alert("Me configure!") },
+    toggleMode: () => { alert("Me configure!") },
 });
 
 export default function ColorModeProvider(props) {
