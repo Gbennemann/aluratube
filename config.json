@@ -127,8 +127,13 @@
         },
         {
           "title": "O que é o C#? #HipstersPontoTube",
-          "url": "https://www.youtube.com/watch?v=0JWMVc1CqpA",
+          "url": "https://youtu.be/0JWMVc1CqpA",
           "thumb": "https://img.youtube.com/vi/0JWMVc1CqpA/hqdefault.jpg"
+        },  
+        {
+          "title": "Entendendo Back-End para Iniciantes em Programação (Parte 1)",
+          "url": "https://youtu.be/Qjk-cSW-jk4",
+          "thumb": "https://i.ytimg.com/vi/Qjk-cSW-jk4/mqdefault.jpg"
         }
       ]
     }
