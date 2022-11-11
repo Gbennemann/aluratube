@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 import React, { use } from "react";
 import { StyledRegisterVideo } from "./style";
 
@@ -21,6 +22,11 @@ function useForm(propsDoForm) {
   };
 }
 
+const PROJECT_URL = "https://ijcnzvhxbxgkjgohaezt.supabase.co";
+const PUBLIC_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlqY256dmh4Ynhna2pnb2hhZXp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjgxODAwMDYsImV4cCI6MTk4Mzc1NjAwNn0.k2LKdr62y2VMH9XTJ0sRTX_KBcCYSHrMHH5hlbudkeE";
+const supabase = createClient(PROJECT_URL, PUBLIC_KEY);
+
 export default function RegisterVideo() {
   const formCadastro = useForm({
     initialValues: { titulo: "", url: "" },
@@ -36,14 +42,24 @@ export default function RegisterVideo() {
         <form
           onSubmit={(evento) => {
             evento.preventDefault();
+
+            supabase.from("video").insert({
+              title: formCadastro.values.titulo,
+              url: formCadastro.values.url,
+              thumb: "",
+              playlist: "jogos",
+            });
+
             setFormVisivel(false);
             formCadastro.clearForm();
-          }}>
+          }}
+        >
           <div>
             <button
               type="button"
               className="close-modal"
-              onClick={() => setFormVisivel(false)}>
+              onClick={() => setFormVisivel(false)}
+            >
               X
             </button>
             <input

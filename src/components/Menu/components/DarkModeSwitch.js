@@ -60,7 +60,6 @@ export default function DarkModeSwitch() {
         }}
       />
       <label htmlFor="darkmode" className="darkmode-switch">
-
         <span>🌙</span>
         <span>☀️</span>
       </label>

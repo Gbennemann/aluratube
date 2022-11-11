@@ -3,20 +3,36 @@ import config from "../config.json";
 import styled from "styled-components";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
+import { videoService } from "../src/services/videoService";
 
 function HomePage() {
+  const service = videoService();
   const [valorDoFiltro, setValorDoFiltro] = React.useState("");
+
+  const [playlists, setPlaylists] = React.useState({});
+
+  React.useEffect(() => {
+    service.getALLVideos().then((dados) => {
+      const novasPlaylists = { ...playlists };
+      dados.data.forEach((video) => {
+        if (!novasPlaylists[video.playlist])
+          novasPlaylists[video.playlist] = [];
+        novasPlaylists[video.playlist].push(video);
+      });
+      setPlaylists({ novasPlaylists });
+    });
+  }, []);
 
   return (
     <>
-    
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           flex: 1,
           // backgroundColor: "red",
-        }}>
+        }}
+      >
         <Menu
           valorDoFiltro={valorDoFiltro}
           setValorDoFiltro={setValorDoFiltro}
@@ -78,18 +94,13 @@ function Header() {
 }
 
 function Timeline({ searchValue, ...propriedades }) {
-  // console.log("Dentro do componente", propriedades.playlists);
   const playlistNames = Object.keys(propriedades.playlists);
-  // Statement
-  // Retorno por expressão
+
   return (
     <StyledTimeline>
       {playlistNames.map((playlistName) => {
         const videos = propriedades.playlists[playlistName];
-        {
-          /* console.log(playlistName);
-        console.log(videos); */
-        }
+
         return (
           <section key={playlistName}>
             <h2>{playlistName}</h2>
